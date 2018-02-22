@@ -33,6 +33,16 @@
 #   config_hash    => { 'build_requires_install_policy' => 'no' },
 #   ftp_proxy      => 'http://your_ftp_proxy.com',
 #   http_proxy     => 'http://your_http_proxy.com',
+#   modules        => {
+#     'Clone::Closure' => {
+#       ensure => present,
+#       force  => true,
+#     },
+#     'Foo::Bar' => {
+#       ensure    => present,
+#       local_lib => '/opt',
+#     }
+#   }
 # }
 #
 class cpan (
@@ -49,6 +59,12 @@ class cpan (
   $ftp_proxy         = $cpan::params::ftp_proxy,
   $http_proxy        = $cpan::params::http_proxy,
   $urllist           = $cpan::params::urllist,
+  Hash[
+    Pattern[/^\w+(::\w+)*$/],
+    Hash[
+      String[1],
+      Any
+  ]] $modules        = undef,
 ) inherits cpan::params {
 
   validate_bool($manage_config)
@@ -68,6 +84,7 @@ class cpan (
   anchor { 'cpan::begin': }
   -> class { '::cpan::install': }
   -> class { '::cpan::config': }
+  -> class { '::cpan::modules': }
   -> anchor { 'cpan::end': }
 
 }
