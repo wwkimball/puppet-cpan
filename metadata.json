@@ -1,9 +1,8 @@
 {
   "name": "meltwater-cpan",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "author": "meltwater",
   "summary": "Provides a puppet type to easily install Perl CPAN modules.",
-  "description": "Puppet module for installing and configuring the Marathon framework for Mesos.",
   "license": "Apache-2.0",
   "source": "https://github.com/meltwater/puppet-cpan",
   "project_page": "https://github.com/meltwater/puppet-cpan",
@@ -20,15 +19,12 @@
   ],
   "tags": [ "cpan", "perl", "metacpan", "module", "lib" ],
   "dependencies": [
-    {
-      "name":"puppetlabs-stdlib",
-      "version_requirement":">= 2.2.0"
-    }
+    { "name": "puppetlabs/stdlib", "version_requirement": "4.x" }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 3.4.0 < 6.0.0"
+      "version_requirement": ">= 4.9.0 < 6.0.0"
     }
   ]
 }

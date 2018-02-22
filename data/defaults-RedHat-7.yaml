@@ -1,0 +1,25 @@
+---
+################################################################################
+# Default arguments for this Puppet module that apply to Red Hat 7 and
+# derivative operating systems.  Environment- and globa-tier data override these
+# values.
+#
+# Notes:
+# 1. CPAN has been declared "harmful" to RHEL-based systems (you can search for
+#    this, it's all over the web).  That said, there are still many modules that
+#    don't yet have RPMs.  So, we are faced with a choice:  either build custom
+#    RPMs outselves for each missing package, or use a modified version of CPAN
+#    which permits ONLY user-based libs.  Not everyone cares to learn how to
+#    build RPMs, or has the time to do so.  As such, CPAN on EL 7 installs
+#    automatically with perl-local-lib.  Similar configuration is required.
+# 2. As another consequence of Note 1, the Config.pm file is no longer used; it
+#    is now user-specific.  Because Puppet runs (normally) as root, this file is
+#    now at:  /root/.cpan/CPAN/MyConfig.pm
+# 3. As a perhaps fatal consequence of Note 1, modules are installed only for
+#    the root user.  CPAN users can no longer install system-wide modules.
+################################################################################
+cpan::perl_config: /root/.cpan/CPAN/MyConfig.pm
+cpan::root_group: wheel
+cpan::local_lib: true   # Mandatory dependency for perl-CPAN
+
+# vim: syntax=yaml:tabstop=2:softtabstop=2:shiftwidth=2:expandtab:ai

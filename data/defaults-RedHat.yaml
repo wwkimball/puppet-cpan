@@ -1,0 +1,11 @@
+---
+################################################################################
+# Default arguments for this Puppet module that apply to Red Hat and derivative
+# operating systems in the most general case.  Other more specific default data
+# along with environment- and globa-tier data override these values.
+################################################################################
+cpan::manage_package: true
+cpan::package_name: perl-CPAN
+cpan::local_lib_package: perl-local-lib
+
+# vim: syntax=yaml:tabstop=2:softtabstop=2:shiftwidth=2:expandtab:ai

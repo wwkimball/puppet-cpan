@@ -1,0 +1,9 @@
+---
+################################################################################
+# Default arguments for this Puppet module that apply to Red Hat 5 and
+# derivative operating systems.  Environment- and globa-tier data override these
+# values.
+################################################################################
+cpan::perl_config: /usr/share/perl5/CPAN/Config.pm
+
+# vim: syntax=yaml:tabstop=2:softtabstop=2:shiftwidth=2:expandtab:ai

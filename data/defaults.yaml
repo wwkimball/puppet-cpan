@@ -1,0 +1,41 @@
+---
+################################################################################
+# Default arguments for this Puppet module that apply to all operating systems
+# unless overridden by more specific defaults or environment- or global- layer
+# data.
+################################################################################
+# Define a reusable hash alias for deep merge options
+cpan::deep_merge: &deep_merge
+  merge:
+    strategy: deep
+    knockout_prefix: --
+    merge_hash_arrays: true
+
+# Control lookup behavior
+lookup_options:
+  cpan::modules:
+    <<: *deep_merge
+  cpan::support_packages:
+    <<: *deep_merge
+
+# Set default arguments which apply to all operating systems
+cpan::manage_config: true
+cpan::installdirs: site
+cpan::local_lib: false
+cpan::config_template: cpan/cpan.conf.erb
+cpan::config_hash:
+  build_requires_install_policy: 'no'
+
+cpan::package_ensure: present
+cpan::support_packages:
+  gcc: {}
+  make: {}
+
+cpan::urllist: []
+
+cpan::manage_package: false
+
+cpan::root_user: root
+cpan::root_group: root
+
+# vim: syntax=yaml:tabstop=2:softtabstop=2:shiftwidth=2:expandtab:ai

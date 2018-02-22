@@ -1,0 +1,10 @@
+---
+################################################################################
+# Default arguments for this Puppet module that apply to FreeBSD and derivative
+# operating systems in the most general case.  Other more specific default data
+# along with environment- and globa-tier data override these values.
+################################################################################
+cpan::perl_config: "/usr/local/perl5/5.%{facts.perl.minversion}/CPAN/Config.pm"
+cpan::root_group: wheel
+
+# vim: syntax=yaml:tabstop=2:softtabstop=2:shiftwidth=2:expandtab:ai

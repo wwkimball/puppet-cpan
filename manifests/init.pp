@@ -45,46 +45,35 @@
 #   }
 # }
 #
-class cpan (
-  $manage_config     = $cpan::params::manage_config,
-  $manage_package    = $cpan::params::manage_package,
-  $installdirs       = $cpan::params::installdirs,
-  $local_lib         = $cpan::params::local_lib,
-  $config_template   = $cpan::params::config_template,
-  $config_hash       = $cpan::params::config_hash,
-  $root_user         = $cpan::params::root_user,
-  $root_group        = $cpan::params::root_group,
-  $package_ensure    = $cpan::params::package_ensure,
-  $perl_config       = $cpan::params::perl_config,
-  $ftp_proxy         = $cpan::params::ftp_proxy,
-  $http_proxy        = $cpan::params::http_proxy,
-  $urllist           = $cpan::params::urllist,
+class cpan(
+  Hash[String[1], Any]           $config_hash,
+  String[3]                      $config_template,
+  Enum['perl', 'site', 'vendor'] $installdirs,
+  Boolean                        $local_lib,
+  String[1]                      $local_lib_package,
+  Boolean                        $manage_config,
+  Boolean                        $manage_package,
+  String[1]                      $package_ensure,
+  String[1]                      $package_name,
+  Stdlib::Absolutepath           $perl_config,
+  Variant[String[1], Integer]    $root_group,
+  Variant[String[1], Integer]    $root_user,
   Hash[
+    String[1],
+    Hash[String[1], Any]
+  ]                              $support_packages,
+  Array[Stdlib::HTTPUrl]         $urllist,
+  Optional[Stdlib::HTTPUrl]      $ftp_proxy        = undef,
+  Optional[Stdlib::HTTPUrl]      $http_proxy       = undef,
+  Optional[Hash[
     Pattern[/^\w+(::\w+)*$/],
     Hash[
       String[1],
       Any
-  ]] $modules        = undef,
-) inherits cpan::params {
-
-  validate_bool($manage_config)
-  validate_bool($manage_package)
-  validate_string($installdirs)
-  validate_bool($local_lib)
-  validate_string($config_template)
-  validate_string($package_ensure)
-  if $ftp_proxy {
-    validate_string($ftp_proxy)
-  }
-  if $http_proxy {
-    validate_string($http_proxy)
-  }
-  validate_array($urllist)
-
-  anchor { 'cpan::begin': }
-  -> class { '::cpan::install': }
+  ]]]                            $modules          = undef,
+) {
+  class { '::cpan::install': }
   -> class { '::cpan::config': }
   -> class { '::cpan::modules': }
-  -> anchor { 'cpan::end': }
-
+  -> Class['cpan']
 }

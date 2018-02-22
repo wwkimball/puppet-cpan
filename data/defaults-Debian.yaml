@@ -1,0 +1,12 @@
+---
+################################################################################
+# Default arguments for this Puppet module that apply to Debian and derivative
+# operating systems in the most general case.  Other more specific default data
+# along with environment- and globa-tier data override these values.
+################################################################################
+cpan::manage_package: true
+cpan::package_name: perl-modules
+cpan::perl_config: /etc/perl/CPAN/Config.pm
+cpan::local_lib_package: liblocal-lib-perl
+
+# vim: syntax=yaml:tabstop=2:softtabstop=2:shiftwidth=2:expandtab:ai

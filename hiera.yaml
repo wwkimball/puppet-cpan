@@ -1,0 +1,16 @@
+---
+################################################################################
+# Hiera configuration file for this Puppet module.
+################################################################################
+version: 5
+
+defaults:
+  data_hash: yaml_data
+  datadir: data
+
+hierarchy:
+  - name: Module defaults
+    paths:
+      - "defaults-%{facts.os.family}-%{facts.os.release.major}.yaml"
+      - "defaults-%{facts.os.family}.yaml"
+      - defaults.yaml
