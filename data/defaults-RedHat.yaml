@@ -7,5 +7,6 @@
 cpan::manage_package: true
 cpan::package_name: perl-CPAN
 cpan::local_lib_package: perl-local-lib
+cpan::perl_config: /usr/share/perl5/CPAN/Config.pm
 
 # vim: syntax=yaml:tabstop=2:softtabstop=2:shiftwidth=2:expandtab:ai
