@@ -3,7 +3,6 @@ Puppet::Type.type(:cpan).provide(:default) do
 
   commands cpan: 'cpan'
   commands perl: 'perl'
-  confine  osfamily: %i[Debian DragonFly FreeBSD RedHat Windows]
   ENV['PERL_MM_USE_DEFAULT'] = '1'
 
   def install; end
