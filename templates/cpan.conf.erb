@@ -15,14 +15,14 @@ $CPAN::Config = {
   'curl' => q[/usr/bin/curl],
   'ftp' => q[/usr/bin/ftp],
   'ftp_passive' => q[1],
-  'ftp_proxy' => q[<% if @ftp_proxy %><%= @ftp_proxy %><% end %>],
+  'ftp_proxy' => q[<% if scope['cpan::ftp_proxy'] %><%= scope['cpan::ftp_proxy'] %><% end %>],
   'getcwd' => q[cwd],
   'gpg' => q[/usr/bin/gpg],
   'gzip' => q[/bin/gzip],
   'halt_on_failure' => q[0],
   'histfile' => q[/root/.cpan/histfile],
   'histsize' => q[100],
-  'http_proxy' => q[<% if @http_proxy %><%= @http_proxy %><% end %>],
+  'http_proxy' => q[<% if scope['cpan::http_proxy'] %><%= scope['cpan::http_proxy'] %><% end %>],
   'inactivity_timeout' => q[0],
   'index_expire' => q[1],
   'inhibit_startup_message' => q[0],
@@ -33,11 +33,11 @@ $CPAN::Config = {
   'make_arg' => q[],
   'make_install_arg' => q[],
   'make_install_make_command' => q[],
-  'makepl_arg' => q[INSTALLDIRS=<%=@installdirs%>],
+  'makepl_arg' => q[INSTALLDIRS=<%=scope['cpan::installdirs']%>],
   'mbuild_arg' => q[],
   'mbuild_install_arg' => q[],
   'mbuild_install_build_command' => q[./Build],
-  'mbuildpl_arg' => q[--installdirs <%=@installdirs%>],
+  'mbuildpl_arg' => q[--installdirs <%=scope['cpan::installdirs']%>],
   'ncftp' => q[],
   'ncftpget' => q[],
   'no_proxy' => q[],
@@ -60,13 +60,13 @@ $CPAN::Config = {
   'trust_test_report_history' => q[0],
   'unzip' => q[],
   'urllist' => [
-<%= @urllist.map{ |url| "    q[#{url}]" }.join(",\n") %>
+<%= scope['cpan::urllist'].map{ |url| "    q[#{url}]" }.join(",\n") %>
   ],
   'use_sqlite' => q[0],
   'wget' => q[/usr/bin/wget],
   'yaml_load_code' => q[0],
   'yaml_module' => q[YAML],
-  <% @config_hash.each do |k,v| -%>
+  <% scope['cpan::config_hash'].each do |k,v| -%>
     '<%= k -%>' => 'q[<%= v -%>]',
   <% end -%>
 };
